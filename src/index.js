@@ -1,3 +1,4 @@
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -133,7 +134,7 @@ import './index.css';
           </li>
         );
       });
-      
+
          let status;
          if (winner){
            status = 'Winner:' + winner 
@@ -179,10 +180,17 @@ import './index.css';
     }
     return null;
   }
+  
+  const user = 'X';
+  const element = <h1> Congratulations {user} ! </h1>;
+  
+
+
   // ========================================
   
   ReactDOM.render(
-    <Game />,
+     element,
+   // <Game />,
     document.getElementById('root')
   );
   
