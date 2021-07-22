@@ -120,6 +120,7 @@ import './index.css';
     
 
     render() {
+      
       const history = this.state.history;
       const current = history[this.state.stepNumber];
       const winner =  calculateWinner(current.squares);
@@ -145,18 +146,29 @@ import './index.css';
          }
 
       return (
+        <React.Fragment>
         <div className="game">
-          <div className="game-board">
-            <Board 
-              squares={current.squares}
-              onClick={(i) => this.handleClick(i)}
-            />
-          </div>
-          <div className="game-info">
-            <div>{ status }</div>
-            <ol>{ moves }</ol>
-          </div>
+        
+          <td>
+           <div className="Login">
+             <LoginControl />
+            </div>
+          </td>
+          <td>
+            <div className="game-board">
+              <Board 
+                squares={current.squares}
+                onClick={(i) => this.handleClick(i)}
+             />
+            </div> 
+            <div className="game-info">
+              <div>{ status }</div>
+              <ol>{ moves }</ol>
+            </div>
+          </td>
+         
         </div>
+        </React.Fragment>
       );
     }
   }
@@ -180,17 +192,84 @@ import './index.css';
     }
     return null;
   }
+
+  function UserGreeting(props) {
+    return <h1>Welcome back!</h1>;
+  }
   
-  const user = 'X';
-  const element = <h1> Congratulations {user} ! </h1>;
+  function GuestGreeting(props) {
+    return <h1>Please sign up.</h1>;
+  }
+
+
+  function Greeting(props) {
+    const isLoggedIn = props.isLoggedIn;
+    if (isLoggedIn) {
+      return <UserGreeting />;
+    }
+    return <GuestGreeting />;
+  }
+
+  function LoginButton(props) {
+    return (
+      <button onClick={props.onClick}>
+        Login
+      </button>
+    );
+  }
   
+  function LogoutButton(props) {
+    return (
+      <button onClick={props.onClick}>
+        Logout
+      </button>
+    );
+  }
+  
+  class LoginControl extends React.Component {
+    constructor(props) {
+      super(props);
+      this.handleLoginClick = this.handleLoginClick.bind(this);
+      this.handleLogoutClick = this.handleLogoutClick.bind(this);
+      this.state = {isLoggedIn: false};
+    }
+  
+    handleLoginClick() {
+      this.setState({isLoggedIn: true});
+    }
+  
+    handleLogoutClick() {
+      this.setState({isLoggedIn: false});
+    }
+  
+    render() {
+      const isLoggedIn = this.state.isLoggedIn;
+      let button;
+      if (isLoggedIn) {
+        button = <LogoutButton onClick={this.handleLogoutClick} />;
+      } else {
+        button = <LoginButton onClick={this.handleLoginClick} />;
+      }
+  
+      return (
+        <div>
+          <Greeting isLoggedIn={isLoggedIn} />
+          {button}
+        </div>
+      );
+    }
+  }
+  
+  
+
+
 
 
   // ========================================
   
   ReactDOM.render(
-     element,
-   // <Game />,
+    
+    <Game />,
     document.getElementById('root')
   );
   
