@@ -2,6 +2,8 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+//import Button from 'react-bootstrap/Button';
+//import '/node_modules/bootstrap/dist/css/bootstrap.css';
 
 /*class Square extends React.Component {
     render() {
@@ -141,37 +143,86 @@ import './index.css';
            status = 'Winner:' + winner 
          }
          else{
-          status = 'Nest Player: ' + 
+          status = 'Next Player: ' + 
           (this.state.xIsNext ? 'X' : 'O')
          }
 
       return (
-        <React.Fragment>
         <div className="game">
-        
-          <td>
-           <div className="Login">
-             <LoginControl />
-            </div>
-          </td>
-          <td>
-            <div className="game-board">
+          <div className="Login"> 
+             
+          </div>
+          <div className="game-board">
               <Board 
                 squares={current.squares}
                 onClick={(i) => this.handleClick(i)}
              />
-            </div> 
-            <div className="game-info">
+          </div> 
+          <div className="game-info">
               <div>{ status }</div>
               <ol>{ moves }</ol>
-            </div>
-          </td>
-         
+          </div>
         </div>
-        </React.Fragment>
       );
     }
   }
+
+  class NameForm extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {player1: '', player2: '', playersSubmitted: false};
+  
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
+    }
+  
+    handleChange(event) {
+      //let player1: event.target.value;
+      //let player2: event.target.value;
+      const value = event.target.value;
+      this.setState({[event.target.name]: value});
+    }
+  
+    handleSubmit(event) {
+      //const name = this.state.name;
+      //const submitted = true ;
+      if (this.state.player1 != '' && this.state.player2 != '' )
+       { this.setState({playersSubmitted: true});
+       event.preventDefault();
+        }
+      }
+      
+    
+  
+    render() {
+     // let submitted = false;
+      return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Player 1  
+            <input type="text" name="player1" value={this.state.player1} onChange={this.handleChange} />
+            Player 2
+            <input type="text" name="player2" value={this.state.player2} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+        <div className="game">
+        { (this.state.playersSubmitted) 
+        ? <div>
+          <h2> welcome {this.state.player1} and {this.state.player2}</h2>
+          <Game/>
+         </div>
+        : <h2> Login to play </h2>
+        } 
+        </div>
+      </div>
+      );
+        }
+        
+    
+    }
+
 
   function calculateWinner(squares) {
     const lines = [
@@ -192,84 +243,13 @@ import './index.css';
     }
     return null;
   }
-
-  function UserGreeting(props) {
-    return <h1>Welcome back!</h1>;
-  }
   
-  function GuestGreeting(props) {
-    return <h1>Please sign up.</h1>;
-  }
-
-
-  function Greeting(props) {
-    const isLoggedIn = props.isLoggedIn;
-    if (isLoggedIn) {
-      return <UserGreeting />;
-    }
-    return <GuestGreeting />;
-  }
-
-  function LoginButton(props) {
-    return (
-      <button onClick={props.onClick}>
-        Login
-      </button>
-    );
-  }
-  
-  function LogoutButton(props) {
-    return (
-      <button onClick={props.onClick}>
-        Logout
-      </button>
-    );
-  }
-  
-  class LoginControl extends React.Component {
-    constructor(props) {
-      super(props);
-      this.handleLoginClick = this.handleLoginClick.bind(this);
-      this.handleLogoutClick = this.handleLogoutClick.bind(this);
-      this.state = {isLoggedIn: false};
-    }
-  
-    handleLoginClick() {
-      this.setState({isLoggedIn: true});
-    }
-  
-    handleLogoutClick() {
-      this.setState({isLoggedIn: false});
-    }
-  
-    render() {
-      const isLoggedIn = this.state.isLoggedIn;
-      let button;
-      if (isLoggedIn) {
-        button = <LogoutButton onClick={this.handleLogoutClick} />;
-      } else {
-        button = <LoginButton onClick={this.handleLoginClick} />;
-      }
-  
-      return (
-        <div>
-          <Greeting isLoggedIn={isLoggedIn} />
-          {button}
-        </div>
-      );
-    }
-  }
-  
-  
-
-
-
 
   // ========================================
   
   ReactDOM.render(
     
-    <Game />,
+    <NameForm/>,
     document.getElementById('root')
   );
   
