@@ -21,7 +21,6 @@ export class Board extends React.Component {
         </div>
         <Square
           value={this.props.squares[i]}
-          //onClick={() => this.handleClick(i)} //set up a click event listener 
           onClick={() => this.props.onClick(i)}
           isValid={isValid}
 
@@ -32,7 +31,6 @@ export class Board extends React.Component {
 
   render() {
     let isValid = false
-    console.log(this.props.validSquares)
     return (
       <div>
         <div className="board-row">

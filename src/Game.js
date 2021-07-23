@@ -1,7 +1,9 @@
 import { Board } from "./Board"
 import React from 'react'
 import Score from './Score'
+
 export class Game extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -14,12 +16,12 @@ export class Game extends React.Component {
       stepNumber: 0,
       xIsNext: true,
       restart: false,
-      validSquares: Array(3)
     }
     //let l = Array(9).fill(null)
     this.restart = this.restart.bind(this)
     //this.handleClick = this.handleClick.bind(this)
   }
+
 
   /*handleChange(winner,line){
     if (winner){
@@ -52,11 +54,9 @@ export class Game extends React.Component {
     ];
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
-      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) 
+      {
          //this.setState({validSqaures: lines[i]}) 
-        (this.state.restart === true ) 
-          ? this.setState({restart: false}) 
-          : console.log(this.state.restart)
           return squares[a];
       }
     }
@@ -82,27 +82,22 @@ export class Game extends React.Component {
       }
     }
   }
+  setRestart(a){
+    this.setState({restart: a})
+  }
+ 
 
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
     const winner = this.calculateWinner(squares)
-    let line = this.getValidline(current.squares)
-    console.log(winner)
-    
-    if (winner){
-      console.log(line)
-      this.setState({validSquares: line})
-      console.log(this.state.validSquares)
-      
-    }
     if (winner || squares[i]) {
+      (this.state.restart === true ) 
+      ? this.setState({restart: false}) 
+      : console.log(this.state.restart)
       return;
     }
-
-    
-
     squares[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState({
       history: history.concat([{
@@ -186,5 +181,4 @@ export class Game extends React.Component {
     );
   }
 }
-
 
