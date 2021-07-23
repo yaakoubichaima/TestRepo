@@ -26,16 +26,17 @@ export default class Score extends Component {
     if (restart){
       this.setState({updated: false})
     }
-    if (winner === 'X' && !(this.state.updated) ) {
+    if(winner && !(this.state.updated)){
+    if (winner === 'X' ) {
       this.setState({X: this.state.X+1})
      // console.log(this.state.X)
     }
     else
-    if (winner === 'O' && (!(this.state.updated))){
+    {
       this.setState({O: this.state.O+1})
     }
     this.setState({updated: true})
-    //console.log(this.state.updated)
+  }  //console.log(this.state.updated)
   }
 
 
