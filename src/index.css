@@ -32,6 +32,16 @@ body {
     width: 34px;
   }
 
+  .resetButton:hover {  
+    background-color: #ffffff; /* Green */
+    color: rgb(36, 36, 36);
+  }
+
+  .restartButton:hover {  
+    background-color: #ffffff; /* Green */
+    color: rgb(36, 36, 36);
+  }
+
   .validSquare {
     background: rgb(87, 255, 72);
     border: 1px solid rgb(41, 129, 7);
