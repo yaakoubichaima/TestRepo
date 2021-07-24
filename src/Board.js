@@ -3,21 +3,23 @@ import React from 'react'
 
 
 export class Board extends React.Component {
-  /* constructor(props) {
-      super(props);
-      this.state = {
-         squares: Array(9).fill(null),
-         xIsNext: true,
-      };
-     } */
+  checkValid(i) {
+    let isValid
+    if (this.props.validSquares) {
+      if ((this.props.validSquares).indexOf(i) !== -1) { isValid = true }
+      else { isValid = false }
+    }
+    else {
+      isValid = false
+    }
+    return isValid
+  }
+
   renderSquare(i, isValid) {
     return (
       <div>
         <div>
-          {((this.props.validSquares).indexOf(i) !== -1)
-            ? isValid = true
-            : isValid = false
-          }
+          {isValid = this.checkValid(i)}
         </div>
         <Square
           value={this.props.squares[i]}
