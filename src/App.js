@@ -8,8 +8,7 @@ export class App extends React.Component {
     this.state = {
       player1: '',
       player2: '',
-      playersSubmitted: false,
-      score: [0, 0]
+      playersSubmitted: false
     };
 
     this.handleChange = this.handleChange.bind(this);

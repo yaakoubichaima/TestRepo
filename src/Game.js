@@ -20,10 +20,9 @@ export class Game extends React.Component {
       scoreX: 0,
       scoreO: 0
     }
-    //let l = Array(9).fill(null)
-    this.restart = this.restart.bind(this)
-    this.calculateWinner = this.calculateWinner.bind(this)
-    this.handleClick = this.handleClick.bind(this)
+    //this.restart = this.restart.bind(this)
+    //this.calculateWinner = this.calculateWinner.bind(this)
+    //this.handleClick = this.handleClick.bind(this)
   }
   restart() {
     this.setState({
@@ -63,18 +62,15 @@ export class Game extends React.Component {
           this.setState({ scoreX: this.state.scoreX + 1 })
         }
         else {
-          if (squares[a] == 'O') {
             this.setState({ winner: 'O' })
             this.setState({ scoreO: this.state.scoreO + 1 })
-          }
         }
         return;
       }
     }
-    //return null;
   }
 
-  getValidline(squares) {
+  getValidLine(squares) {
     const lines = [
       [0, 1, 2],
       [3, 4, 5],
@@ -147,7 +143,7 @@ export class Game extends React.Component {
     let status;
     if (this.state.winner) {
       status = 'Winner:' + this.state.winner
-      line = this.getValidline(current.squares)
+      line = this.getValidLine(current.squares)
     }
     else {
       if (this.isFull(current.squares)) {
