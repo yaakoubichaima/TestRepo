@@ -20,9 +20,6 @@ export class Game extends React.Component {
       scoreX: 0,
       scoreO: 0
     }
-    //this.restart = this.restart.bind(this)
-    //this.calculateWinner = this.calculateWinner.bind(this)
-    //this.handleClick = this.handleClick.bind(this)
   }
   restart() {
     this.setState({
